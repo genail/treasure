@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>pl.drunkpirate.treasure</groupId>
+  <artifactId>treasure</artifactId>
+  <version>0.1-SNAPSHOT</version>
+
+  <scm>
+    <connection>scm:git:git://git.cedarsoft.com/pl.drunkpirate.treasure.treasure</connection>
+    <developerConnection>scm:git:ssh://git.cedarsoft.com/home/git/pl.drunkpirate.treasure.treasure</developerConnection>
+  </scm>
+  
+  <dependencies>
+    <dependency>
+        <groupId>slick</groupId>
+        <artifactId>slick</artifactId>
+        <version>274</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.lwjgl</groupId>
+        <artifactId>lwjgl-native</artifactId>
+        <version>${lwjgl.version}</version>
+        <classifier>linux32</classifier>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.lwjgl</groupId>
+        <artifactId>lwjgl-native</artifactId>
+        <version>${lwjgl.version}</version>
+        <classifier>linux64</classifier>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.lwjgl</groupId>
+        <artifactId>lwjgl-native</artifactId>
+        <version>${lwjgl.version}</version>
+        <classifier>win32</classifier>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.lwjgl</groupId>
+        <artifactId>lwjgl-native</artifactId>
+        <version>${lwjgl.version}</version>
+        <classifier>win64</classifier>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.lwjgl</groupId>
+        <artifactId>lwjgl-native</artifactId>
+        <version>${lwjgl.version}</version>
+        <classifier>mac</classifier>
+    </dependency>
+    
+    <!--Guava-->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>r09</version>
+    </dependency>
+
+    <!--Test Dependencies-->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.2</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.jmock</groupId>
+      <artifactId>jmock-junit4</artifactId>
+      <version>2.5.1</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.jmock</groupId>
+      <artifactId>jmock-legacy</artifactId>
+      <version>2.5.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <repositories>
+    <repository>
+      <id>slick</id>
+      <url>http://slick.cokeandcode.com/mavenrepo/</url>
+    </repository>
+    <repository>
+      <id>b2s-repo</id>
+      <url>http://b2s-repo.googlecode.com/svn/trunk/mvn-repo</url>
+    </repository>
+  </repositories>
+  
+  <properties>
+   <lwjgl.version>2.1.0</lwjgl.version>
+  </properties>
+
+</project>
