@@ -1,4 +1,4 @@
-package pl.drunkpirate.treasure;
+package pl.drunkpirate.treasure.resources;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static pl.drunkpirate.treasure.Strings.r;

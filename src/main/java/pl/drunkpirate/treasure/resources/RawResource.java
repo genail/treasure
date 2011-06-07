@@ -1,4 +1,4 @@
-package pl.drunkpirate.treasure;
+package pl.drunkpirate.treasure.resources;
 
 import java.util.logging.Logger;
 

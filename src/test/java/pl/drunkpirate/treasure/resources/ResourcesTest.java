@@ -1,4 +1,4 @@
-package pl.drunkpirate.treasure;
+package pl.drunkpirate.treasure.resources;
 
 
 import static junit.framework.Assert.assertNotNull;
@@ -9,6 +9,9 @@ import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import pl.drunkpirate.treasure.resources.ImageResource;
+import pl.drunkpirate.treasure.resources.RawResource;
 
 public class ResourcesTest {
     @SuppressWarnings("unused")
