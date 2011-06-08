@@ -6,14 +6,10 @@ import static pl.drunkpirate.treasure.Strings.r;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.common.io.Closeables;
 
 public abstract class Resource {
@@ -21,30 +17,8 @@ public abstract class Resource {
     
     private static final String[] DEFAULT_SEARCH_PATTERN = new String[] {"{}"};
     private static final String PROPERTIES_TEMPLATE = "{}.properties";
-    
-    private static final Set<String> paths = Sets.newHashSet();
 
-    /** @return true if there are missing resources */
-    public static boolean hasMissing() {
-        return !getMissing().isEmpty();
-    }
     
-    /** @return list of missing resources */
-    public static List<String> getMissing() {
-        List<String> missing = Lists.newArrayList();
-        
-        ClassLoader classLoader = Resource.class.getClassLoader();
-        for (String path : paths) {
-            URL resource = classLoader.getResource(path);
-            if (resource == null) {
-                missing.add(path);
-            }
-        }
-        
-        return missing;
-    }
-    
-
     private final String path;
     private final String[] searchPatterns;
     
@@ -56,7 +30,8 @@ public abstract class Resource {
     protected Resource(String path, String... searchPatterns) {
         this.searchPatterns = searchPatterns.length > 0 ? searchPatterns : DEFAULT_SEARCH_PATTERN;
         this.path = checkNotNull(path);
-        collectPath();
+        
+        registerResource();
     }
     
     protected URL find() {
@@ -74,10 +49,8 @@ public abstract class Resource {
         return cachedUrl;
     }
     
-    private void collectPath() {
-        synchronized (paths) {
-            paths.add(path);
-        }
+    private void registerResource() {
+        Resources.registerResource(this);
     }
     
     public String getPath() {
@@ -124,4 +97,10 @@ public abstract class Resource {
         ClassLoader classLoader = Resource.class.getClassLoader();
         return classLoader.getResource(name);
     }
+
+    @Override
+    public String toString() {
+        return "Resource [path=" + path + "]";
+    }
+    
 }

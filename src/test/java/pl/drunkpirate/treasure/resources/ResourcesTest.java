@@ -3,6 +3,7 @@ package pl.drunkpirate.treasure.resources;
 
 import static junit.framework.Assert.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.junit.After;
@@ -15,6 +16,10 @@ public class ResourcesTest {
     private static final Logger LOGGER = Logger.getLogger(ResourcesTest.class.getName());
 
     public static class R {
+        public static void init() {
+            Resources.init(R.class);
+        }
+        
         public static class images {
             public static final ImageDataResource existing = new ImageDataResource("image");
             public static final ImageDataResource not_existing = new ImageDataResource("image2");
@@ -28,7 +33,7 @@ public class ResourcesTest {
     
     @Before
     public void setUp() throws Exception {
-        
+        R.init();
     }
 
     @After
@@ -37,6 +42,12 @@ public class ResourcesTest {
     
     @Test
     public void testExisting() {
+        assertTrue(Resources.hasMissing());
+        List<Resource> missingResources = Resources.getMissing();
+        
+        assertTrue(missingResources.contains(R.images.not_existing));
+        assertTrue(missingResources.contains(R.raw.not_existing));
+        
         assertNotNull(R.images.existing.find());
         assertNotNull(R.raw.existing.find());
         

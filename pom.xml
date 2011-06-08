@@ -7,8 +7,8 @@
   <version>0.1-SNAPSHOT</version>
 
   <scm>
-    <connection>scm:git:git://git.cedarsoft.com/pl.drunkpirate.treasure.treasure</connection>
-    <developerConnection>scm:git:ssh://git.cedarsoft.com/home/git/pl.drunkpirate.treasure.treasure</developerConnection>
+    <connection>scm:git:git://github.com/genail/treasure.git</connection>
+    <developerConnection>scm:git:git@github.com:genail/treasure.git</developerConnection>
   </scm>
   
   <dependencies>
