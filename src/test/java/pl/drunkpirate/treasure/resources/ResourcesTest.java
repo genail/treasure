@@ -1,17 +1,14 @@
 package pl.drunkpirate.treasure.resources;
 
 
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.*;
 
 import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import pl.drunkpirate.treasure.resources.ImageResource;
-import pl.drunkpirate.treasure.resources.RawResource;
+import org.newdawn.slick.SlickException;
 
 public class ResourcesTest {
     @SuppressWarnings("unused")
@@ -19,8 +16,8 @@ public class ResourcesTest {
 
     public static class R {
         public static class images {
-            public static final ImageResource existing = new ImageResource("image");
-            public static final ImageResource not_existing = new ImageResource("image2");
+            public static final ImageDataResource existing = new ImageDataResource("image");
+            public static final ImageDataResource not_existing = new ImageDataResource("image2");
         }
         
         public static class raw {
@@ -45,5 +42,14 @@ public class ResourcesTest {
         
         assertNull(R.images.not_existing.find());
         assertNull(R.raw.not_existing.find());
+    }
+    
+    @Test
+    public void testProperties() throws SlickException {
+        ImageDataResource imageResource = R.images.existing;
+        assertEquals("vegetable", imageResource.getProperty("name"));
+        assertEquals("180", imageResource.getProperty("rotation"));
+        assertEquals("0.5", imageResource.getProperty("centerX"));
+        assertEquals("0.7", imageResource.getProperty("centerY"));
     }
 }
