@@ -50,7 +50,7 @@ public class ImageDataResource extends Resource {
     };
     
     
-    private WeakReference<ImageData> imageWeakRef = new WeakReference<ImageData>(null);
+    private WeakReference<ImageData> ref = new WeakReference<ImageData>(null);
     
     /**
      * Creates a new instance of {@link ImageDataResource} of image referenced by <code>ref</code>.
@@ -61,17 +61,21 @@ public class ImageDataResource extends Resource {
         super(PREFIX + ref, SEARCH_PATTERNS);
     }
     
-    public ImageData load() throws SlickException {
-        ImageData imageData = imageWeakRef.get();
+    public ImageData get() throws SlickException {
+        ImageData imageData = ref.get();
         if (imageData == null) {
             URL url = find();
+            if (url == null) {
+                throw new SlickException("image resource not found: " + getPath());
+            }
+            
             InputStream input = null;
             try {
                 input = url.openStream();
                 ImageIOImageData imageIOImageData = new ImageIOImageData();
                 imageIOImageData.loadImage(input);
                 
-                imageWeakRef = new WeakReference<ImageData>(imageIOImageData);
+                ref = new WeakReference<ImageData>(imageIOImageData);
             } catch (IOException e) {
                 throw new SlickException("error loading image", e);
             } finally {

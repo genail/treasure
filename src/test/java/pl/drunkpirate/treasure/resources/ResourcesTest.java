@@ -10,24 +10,30 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.util.xml.XMLElement;
+import org.newdawn.slick.util.xml.XMLElementList;
 
 public class ResourcesTest {
     @SuppressWarnings("unused")
     private static final Logger LOGGER = Logger.getLogger(ResourcesTest.class.getName());
 
-    public static class R {
-        public static void init() {
+    static class R {
+        static void init() {
             Resources.init(R.class);
         }
         
         public static class images {
-            public static final ImageDataResource existing = new ImageDataResource("image");
-            public static final ImageDataResource not_existing = new ImageDataResource("image2");
+            static final ImageDataResource existing = new ImageDataResource("image");
+            static final ImageDataResource not_existing = new ImageDataResource("image2");
         }
         
         public static class raw {
-            public static final RawResource existing = new RawResource("raw.xml");
-            public static final RawResource not_existing = new RawResource("raw2.xml");
+            static final RawResource existing = new RawResource("raw.xml");
+            static final RawResource not_existing = new RawResource("raw2.xml");
+        }
+        
+        public static class xml {
+            static final XmlResource map = new XmlResource("map");
         }
     }
     
@@ -53,6 +59,18 @@ public class ResourcesTest {
         
         assertNull(R.images.not_existing.find());
         assertNull(R.raw.not_existing.find());
+    }
+    
+    @Test
+    public void testMapXml() throws SlickException {
+        XMLElement xmlElement = R.xml.map.get();
+        assertEquals("map", xmlElement.getName());
+        
+        XMLElementList sizeElementList = xmlElement.getChildrenByName("size");
+        assertEquals(1, sizeElementList.size());
+        
+        XMLElement sizeElement = sizeElementList.get(0);
+        assertEquals("5", sizeElement.getContent());
     }
     
     @Test
